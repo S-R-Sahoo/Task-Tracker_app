@@ -19,6 +19,11 @@ function addTask() {
     const taskSpan = document.createElement('span');
     taskSpan.textContent = `${taskDate}: ${taskText}`;
 
+    // Add event listener to toggle task completion
+    taskSpan.addEventListener('click', function () {
+        li.classList.toggle('done');
+    });
+
     const editBtn = document.createElement('button');
     editBtn.textContent = 'Edit';
     editBtn.className = 'editBtn';
@@ -87,7 +92,6 @@ function updateCalendar(taskDate) {
     }
 }
 
-
 document.addEventListener('DOMContentLoaded', () => {
     const taskListItems = document.querySelectorAll('#taskList li');
     taskListItems.forEach(task => {
@@ -95,3 +99,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// Clock function
+function updateClock() {
+    const now = new Date();
+    const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    clock.textContent = timeString;
+}
+setInterval(updateClock, 1000);
+updateClock();
